@@ -36,7 +36,15 @@ Patch and/or sponsorship welcome.
 ```sh
 ./bmdcapture -C 1 -m 2 -F nut -o strict=experimental:syncpoints=none -f pipe:1 | avconv -vsync passthrough -y -i - <your options here>
 ```
+#For new DeckLink 4K Extreme card , only support for :
 
+HDMI Color Precision
+10-bit RGB* in HD *capture only, output available in future software update. 10-bit YUV in HD and 4K.
+You should compile "ffmpeg" or "avconv" with --enable-gpl --enable-libx264 and  --enable-nonfree.
+
+```sh
+./bmdcapture -C 1 -m 2 -p 10 -F nut -o strict=experimental:syncpoints=none -f pipe:1 | avconv -vsync passthrough -y -i - <your options here>
+```
 -C select the capture device if more than one is present.
 
 -F define the container format, I suggest using nut.
@@ -44,6 +52,8 @@ Patch and/or sponsorship welcome.
 -f output file name, any libavformat compatible url is supported.
 
 -m specific modeline, resolution+framerate
+
+-p PixelFormat Depth (8 or 10 - default is 8)
 
 -o pass AVFormat AVOptions (expert)
 
